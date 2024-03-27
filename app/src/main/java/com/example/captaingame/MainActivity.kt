@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    CaptainGame()
                 }
             }
         }
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
     fun CaptainGame() {
         val treasuresFound = remember { mutableStateOf(0) }
         val direction = remember { mutableStateOf("North") }
+        val stormOrTreasure = remember { mutableStateOf("") }
 
         Column {
             Text("Treasures Found: ${treasuresFound.value}")
@@ -44,7 +46,10 @@ class MainActivity : ComponentActivity() {
             Button(onClick = {
                 direction.value = "East"
                 if (Random.nextBoolean()) {
-                    treasuresFound.value
+                    treasuresFound.value += 1
+                    stormOrTreasure.value = "Treasure chest ahoy!"
+                } else {
+                    stormOrTreasure.value = "Storm ahead! Brace!"
                 }
 
             }) {
@@ -53,11 +58,37 @@ class MainActivity : ComponentActivity() {
             Button(onClick = {
                 direction.value = "West"
                 if (Random.nextBoolean()) {
-                    treasuresFound.value
+                    treasuresFound.value += 1
+                    stormOrTreasure.value = "Treasure chest ahoy!"
+                } else {
+                    stormOrTreasure.value = "Storm ahead! Brace!"
                 }
             }) {
                 Text("Sail West")
             }
+            Button(onClick = {
+                direction.value = "North"
+                if (Random.nextBoolean()) {
+                    treasuresFound.value += 1
+                    stormOrTreasure.value = "Treasure chest ahoy!"
+                } else {
+                    stormOrTreasure.value = "Storm ahead! Brace!"
+                }
+            }) {
+                Text("Sail North")
+            }
+            Button(onClick = {
+                direction.value = "South"
+                if (Random.nextBoolean()) {
+                    treasuresFound.value += 1
+                    stormOrTreasure.value = "Treasure chest ahoy!"
+                } else {
+                    stormOrTreasure.value = "Storm ahead! Brace!"
+                }
+            }) {
+                Text("Sail South")
+            }
+            Text(text = stormOrTreasure.value)
         }
     }
 }
